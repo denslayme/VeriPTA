@@ -1,0 +1,90 @@
+import React, { useState } from 'react';
+import AuthHeader from '../components/AuthHeader';
+import FeatureList from '../components/FeatureList';
+import '../styles/Auth.css';
+
+function LoginPage() {
+  const [activeTab, setActiveTab] = useState('login');
+  const [password, setPassword] = useState('');
+  const [idnumber, setIDNumber] = useState('');
+  const [email, setEmail] = useState('');
+
+  const system = {
+    name: 'VERIPTA',
+    description: 'PTA Payment Verification System',
+    campus: 'USTP - CDO Campus'
+  };
+    /*ARRAY STRING*/ 
+  const features = [
+    'Secure Payment Verification',
+    'Real-time Transaction Monitoring',
+    'Automated Receipt Processing',
+  ];
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (activeTab === 'login') {
+      alert('Login: ' + idnumber);
+    } else {
+      alert('Account created for: ' + idnumber);
+      setActiveTab('login');
+    }
+  }
+
+  return (
+    <div className="page">
+      <FeatureList
+        systemName={system.name}
+        description={system.description}
+        features={features}
+      />
+
+      <div className="right">
+        <div className="box">
+          <AuthHeader
+            title={system.name}
+            description={system.description}
+            campus={system.campus}
+          />
+
+          <div className="tabs">
+            <button
+              className={activeTab === 'login' ? 'active' : ''}
+              onClick={() => setActiveTab('login')}
+            >Login</button>
+            <button
+              className={activeTab === 'signup' ? 'active' : ''}
+              onClick={() => setActiveTab('signup')}
+            >Sign Up</button>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <div className="group">
+              <label>ID Number</label>
+              <input type="text" placeholder="Enter ID Number "
+                value={idnumber} onChange={(e) => setIDNumber(e.target.value)} required />
+            </div>
+            {activeTab === 'signup' && (
+              <div className="group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter email"
+                  value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
+            )}
+            <div className="group">
+              <label>Password</label>
+              <input type="password"
+                placeholder={activeTab === 'login' ? 'Enter password' : 'Create password'}
+                value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </div>
+            <button type="submit" className="btn">
+              {activeTab === 'login' ? 'Login' : 'Sign Up'}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LoginPage;
