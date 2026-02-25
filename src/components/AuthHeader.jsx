@@ -1,3 +1,5 @@
+import React from 'react';
+
 function AuthHeader({ title, description, campus }) {
   return (
     <div className="header">
@@ -7,4 +9,5 @@ function AuthHeader({ title, description, campus }) {
     </div>
   );
 }
+
 export default AuthHeader;

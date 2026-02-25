@@ -1,3 +1,5 @@
+import React from 'react';
+
 function FeatureList({ systemName, description, features }) {
   return (
     <div className="left">
@@ -16,4 +18,5 @@ function FeatureList({ systemName, description, features }) {
     </div>
   );
 }
+
 export default FeatureList;

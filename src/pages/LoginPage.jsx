@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../components/AuthHeader';
 import FeatureList from '../components/FeatureList';
 import '../styles/Auth.css';
@@ -9,12 +10,14 @@ function LoginPage() {
   const [idnumber, setIDNumber] = useState('');
   const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
+
   const system = {
     name: 'VERIPTA',
     description: 'PTA Payment Verification System',
     campus: 'USTP - CDO Campus'
   };
-    /*ARRAY STRING*/ 
+
   const features = [
     'Secure Payment Verification',
     'Real-time Transaction Monitoring',
@@ -24,7 +27,7 @@ function LoginPage() {
   function handleSubmit(e) {
     e.preventDefault();
     if (activeTab === 'login') {
-      alert('Login: ' + idnumber);
+      navigate('/dashboard');
     } else {
       alert('Account created for: ' + idnumber);
       setActiveTab('login');
@@ -61,7 +64,7 @@ function LoginPage() {
           <form onSubmit={handleSubmit}>
             <div className="group">
               <label>ID Number</label>
-              <input type="text" placeholder="Enter ID Number "
+              <input type="text" placeholder="Enter ID Number"
                 value={idnumber} onChange={(e) => setIDNumber(e.target.value)} required />
             </div>
             {activeTab === 'signup' && (
